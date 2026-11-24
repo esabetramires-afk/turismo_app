@@ -1,0 +1,17 @@
+services:
+  web:
+    image: esabet/turismo_app:v1
+    container_name: turismo_web
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+  db:
+    image: mysql:8.0
+    container_name: turismo_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456"
+      MYSQL_DATABASE: "turismo_db"
+    volumes:
+      - ./turismo_db.sql:/docker-entrypoint-initdb.d/turismo_db.sql
